@@ -1,0 +1,85 @@
+<div class="w-full">
+<p-toast></p-toast>
+ <p-table #dt [value]="products" [rows]="7" [paginator]="true"
+                [globalFilterFields]="['CategoryName','Description']"
+                [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                currentPageReportTemplate="{last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                        <div>
+                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNewAdd()"></button>
+                       </div>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"
+                            (input)="dt.filterGlobal(GetSearchValue($event), 'contains')"
+                            placeholder="Search" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name">Category Name <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="Description">Category Description <p-sortIcon
+                                field="Description"></p-sortIcon></th>
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{product.CategoryName}}</td>
+                        <td>{{product.Description}}</td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"
+                                class="p-button-rounded p-button-success mr-2"
+                                (click)="editProduct(product)"></button>
+                            <button pButton pRipple icon="pi pi-trash"
+                                class="p-button-rounded p-button-danger"
+                                (click)="deleteProduct(product)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                    Total {{products ? products.length : 0 }} Category.
+                    </div>
+                </ng-template>
+ </p-table>
+ </div>
+ <form [formGroup]="Categoryform" (ngSubmit)="onSubmit()">
+ <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}"
+            header="Category Details" [modal]="true" styleClass="p-fluid">
+           
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="name">Category Name</label>
+                    <input type="text" pInputText id="name" formControlName="CName" [ngClass]="{'is-invalid': submitted && f['CName'].errors }">
+                    <small *ngIf="submitted && f.CName.errors" id="CName-help" class="p-error block">
+                        <div *ngIf="f.CName.errors.required">Category Name is Required</div>
+                        <div *ngIf="f.CName.errors.minLength">Category Name be at least 4 characters long.</div>
+                        <div *ngIf="f.CName.errors.pattern">Name must be a valid</div>
+                    </small>
+                </div>
+                <div class="field">
+                    <input type="hidden" pInputText id="name" formControlName="CategoryId"/>
+                </div>
+                <div class="field">
+                    <label for="description">Category Description</label>
+                    <textarea id="description" pInputTextarea formControlName="CDescription" [ngClass]="{'is-invalid': submitted && f['CDescription'].errors }"></textarea>
+                    <small *ngIf="submitted && f.CDescription.errors" id="CName-help" class="p-error block">
+                        <div *ngIf="f.CDescription.errors.required">Description is Required</div>
+                        <div *ngIf="f.CDescription.errors.minLength">Description at least 4 characters long.</div>
+                    </small>
+                </div>            
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                    (click)="hideDialog()"></button>
+                <button type="submit" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"></button>
+            </ng-template>
+        
+</p-dialog>
+</form>
+ <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
