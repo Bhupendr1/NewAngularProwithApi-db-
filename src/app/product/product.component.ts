@@ -106,8 +106,10 @@ status:any=[]
       next: (res) => {
        console.log(res.Message)
         if (res) {
+          this._Api.getCountCart();
           this.messageService.add({key:'s',severity:'success', summary: 'Success', detail: res.Message.toString()});
           // this.getCartItemCount();
+
         }
       },
       error: (err)=> {

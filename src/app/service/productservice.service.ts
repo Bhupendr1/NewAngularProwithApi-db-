@@ -2,7 +2,7 @@
 import { HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { map,BehaviorSubject,} from 'rxjs';
+import { map,BehaviorSubject, Observable,} from 'rxjs';
 import { Product } from '../product';
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,18 @@ export class ProductserviceService {
   productList = new BehaviorSubject<any>([]);
   cartDataList: Product[] = [];
   cart: Product[] = [];
-
+  countdata!:number;
   status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
+
+  private countCartval = new BehaviorSubject<number>(0);
+
+  public getcountCartval(): Observable<number> {
+   return this.countCartval.asObservable();
+ }
+
+   setcountCartval(Num: number): void {
+    this.countCartval.next(Num);
+ }
 
   constructor(private http: HttpClient) { }
   productNames: string[] = [
@@ -122,6 +132,19 @@ export class ProductserviceService {
       grandTotal += a.total;
     })
     return grandTotal
+  }
+
+  getCountCart(){
+ 
+    let rdata={
+      "UserID": 1
+    }
+    this.postRequestUrl01(rdata, "EcartCustomerCart/CartCount").subscribe(res=>{
+      //this.countdata=res[0].totalcart;
+      this.setcountCartval(res[0].totalcart);
+      //console.log(res[0].totalcart)
+    })
+    return this.countdata;
   }
 
   postAddCart(data: any) {

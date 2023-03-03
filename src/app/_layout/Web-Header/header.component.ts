@@ -24,7 +24,7 @@ export class HeaderComponent {
   selectedveg:any;
   switchlang:string='products'
   countSub:any=[];
-  cartCount:any=[]; 
+  cartCount:any; 
   location: any;
   constructor(
     private messageService: MessageService,
@@ -39,12 +39,13 @@ export class HeaderComponent {
     }
 cartvalue:any=[]
   ngOnInit() {
-    this._Api.ProductCount.subscribe(res=>{
-      this.cartCount=res;
-    })
-    // this._Api.getCartItemCount().subscribe(res=>{
-    //   this.cartCount=res[0].totalcart;
-    // });
+    this._Api.getCountCart();
+    setTimeout(() => {
+      this._Api.getcountCartval().subscribe(g=>{
+        this.cartCount=g;
+      })
+       
+    }, 300);
 }  
 dropdownVisible = false;
 isMenuOpen = false;

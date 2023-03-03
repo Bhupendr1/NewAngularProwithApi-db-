@@ -63,6 +63,7 @@ export class CartComponent {
       }
   this._Api.postRequestUrl01(rdata,'EcartCustomerCart/DeleteCart').subscribe(res=>{
     this.loadCart()
+    this._Api.getCountCart();
     this.messageService.add({key:'s',severity:'success', summary: 'Success', detail: res.Message.toString()});
   })
   }
