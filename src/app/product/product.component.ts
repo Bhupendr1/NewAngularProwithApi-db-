@@ -118,6 +118,10 @@ status:any=[]
 
     })
 }
+TotalPrice(Price:any,discount:any){
+  let totalPrice=(Price-(Price*discount/100)).toFixed(2);
+  return totalPrice
+}
 // counterValue:any=[0];
 // getCartItemCount(){
 // this.productService.getCartList().subscribe(d=>{

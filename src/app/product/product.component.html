@@ -14,7 +14,7 @@
         <div class="w-full border-1 border-round surface-border surface-section mt-3 lg:mt-0"
             style="min-height: 25rem;">
             <!-- <p-dataView #dv [value]="'products'| translate" [paginator]="true" [rows]="12" filterBy="name" -->
-            <p-dataView #dv [value]="products" [paginator]="true" [rows]="12" filterBy="name"
+            <p-dataView #dv [value]="products" [paginator]="true" [rows]="12" filterBy="IName"
                 [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
                 <ng-template pTemplate="header">
                     <div class="flex flex-column md:flex-row sm:justify-content-between justify-content-center flex-wrap align-items-center">
@@ -89,13 +89,14 @@
     <ng-template let-product pTemplate="item">
         <div class="product-item surface-card">
             <div class="product-item-content">
-                <div class="p-mb-3">
-                    <img class="product-image" [src]="product.image" alt="Chakra Bracelet">
+                <div class="mb-3">
+                    <img class="product-image" src="data:image/jpeg;base64,{{product.Image}}">
                 </div>
                 <div class="p-2">
-                    <div class="text-900 text-xl font-medium mb-2">{{product.discountprice | currency:'INR'}}</div>
-                    <div class="mb-2"><span class="text-600 line-through">{{product.price | currency:'INR'}}</span><span class="ml-2 text-pink-500 font-medium">%{{discount}}</span></div>
-                    <span class="text-900">{{product.name}}</span>
+                    <div class="text-900 text-xl font-medium mb-2">{{product.TotalPrice | currency:'INR'}}</div>
+                    <div class="text-900 text-xl font-medium mb-2">{{TotalPrice(product.Price,product.Discount)}}</div>
+                    <div class="mb-2"><span class="text-600 line-through">{{product.Price | currency:'INR'}}</span><span class="ml-2 text-pink-500 font-medium">{{product.Discount}}%</span></div>
+                    <span class="text-900">{{product.IName}}</span>
                 </div>
             </div>
         </div>

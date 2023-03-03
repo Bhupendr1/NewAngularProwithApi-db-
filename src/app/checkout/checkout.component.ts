@@ -8,6 +8,7 @@ import {
   MessageService,
   PrimeNGConfig
 } from "primeng/api";
+import { RadioButton } from 'primeng/radiobutton';
 
 @Component({
   selector: 'app-checkout',
@@ -29,8 +30,11 @@ export class CheckoutComponent {
       private Productservice:ProductserviceService,
       private confirmationService: ConfirmationService,
       private messageService: MessageService,
-      private primengConfig: PrimeNGConfig
-    ) {}
+      private primengConfig: PrimeNGConfig,
+    ) {
+
+    }
+
   ngOnInit():void{
    this.checkoutform = this.formbuilder.group({
       Firstname:[''],
@@ -46,6 +50,7 @@ export class CheckoutComponent {
       Expiry:[''],
       CVC: [''],
       CardholderName:[''],
+      selectedValue:[''],
       radioBtn:['Cash-On-Delivery']
     });
     this.price =sessionStorage.getItem('totalPrice');
@@ -156,8 +161,6 @@ clear() {
     this.Productservice.ProductCount.next(d.length)
     })
     }
-    radioclick(E:any){
-      console.log(E)
-    }
+
 }
 

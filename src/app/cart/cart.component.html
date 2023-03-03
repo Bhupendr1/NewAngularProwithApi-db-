@@ -24,7 +24,7 @@
                                         
                                             <div class="inline-flex w-full">
                                                
-                                                <button type="button" fill="clear"  (click)="decreaseCartItem(item)" class="p-element p-button-danger p-inputnumber-button p-inputnumber-button-down p-button p-component p-button-icon-only ng-star-inserted" [disabled]="item.Qnt == 1">
+                                                <button type="button" fill="clear"  (click)="decreaseCartItem(item)" class="p-element p-button-danger p-inputnumber-button p-inputnumber-button-down p-button p-component p-button-icon-only ng-star-inserted" [disabled]="item.Qunatity == 1">
                                                     <span class="p-button-icon pi pi-minus" aria-hidden="true"></span>
                                                    </button>
                                                
@@ -38,10 +38,16 @@
                                             </div>
                                                
 
-                                                <button type="button" (click)="increaseCartItem(item)" class="p-element p-button-success p-inputnumber-button p-inputnumber-button-up p-button p-component p-button-icon-only ng-star-inserted">
+                                            <div *ngIf="item.Qunatity==item.totalQunatity; else elseBlock">
+                                                <button type="button" label="Limit Over" pButton class="p-element p-button-danger p-inputnumber-button p-inputnumber-button-up p-button p-component p-button-icon-only ng-star-inserted">
+                                                    
+                                                 </button>  
+                                            </div>
+                                            <ng-template #elseBlock>
+                                                 <button type="button" (click)="increaseCartItem(item)" class="p-element p-button-success p-inputnumber-button p-inputnumber-button-up p-button p-component p-button-icon-only ng-star-inserted">
                                                     <span class="p-button-icon pi pi-plus" aria-hidden="true"></span>
-                                                </button>
-                                            
+                                                </button>  
+                                            </ng-template>
                                             </div>
                                       
                                         <div class="flex flex-column sm:align-items-end"><span

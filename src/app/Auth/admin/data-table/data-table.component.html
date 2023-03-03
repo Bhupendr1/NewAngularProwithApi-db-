@@ -45,7 +45,7 @@
                                 <td>{{product.Detail}}</td>
                                 <td><img src="data:image/jpeg;base64,{{product.Image}}" alt="" srcset="" height="50" width="50"></td>
                                 <td>{{product.CName}}</td>
-                                <td>{{product.Discount | percent}}</td>
+                                <td>{{product.Discount}}%</td>
                                 <td>{{product.Price | currency:'INR'}}</td>
                                <td><span [class]="'product-badge status-' + product.Qnt">{{product.Qnt}}</span></td>
                                 <td>
