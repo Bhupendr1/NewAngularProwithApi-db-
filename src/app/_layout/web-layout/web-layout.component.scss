@@ -9,3 +9,9 @@
     border-top:2px solid rgb(201, 201, 201);
   }
   
+.logo-container{
+  position: -webkit-sticky;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}

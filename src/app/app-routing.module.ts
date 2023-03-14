@@ -20,6 +20,7 @@ import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.compon
 import { DataTableComponent } from './Auth/admin/data-table/data-table.component';
 import { AddCategoryComponent } from './Auth/admin/add-category/add-category.component';
 import { AuthGuard } from './service/course.guard.service';
+import { DummyComponent } from './dummy/dummy.component';
 const routes: Routes = [
 //Site routes goes here 
 { 
@@ -29,15 +30,16 @@ const routes: Routes = [
   children: [
       {path:'', component: HomeComponent},
       {path:'cart',component:CartComponent},
-      {path:'Checkout',component:CheckoutComponent},
+      {path:'Checkout',component:CheckoutComponent,canActivate:[AuthGuard]},
       {path:'Contact',component:ContactusComponent},
       {path:'Message',component:MessageComponent},
-      {path:'OrderHistory',component:OrderHistoryComponent},
+      {path:'OrderHistory',component:OrderHistoryComponent,canActivate:[AuthGuard]},
       {path:'Profile',component:ProfileComponent},
       {path:'header',component:HeaderComponent},
       {path:'Aboutus',component:AboutUsComponent},
       {path:'productss',component:ProductComponent},
-      {path:'order',component:OrderComponent},
+      {path:'order',component:OrderComponent,canActivate:[AuthGuard]},
+      {path:'dummy',component:DummyComponent},
     ]
 },
 
@@ -46,8 +48,8 @@ const routes: Routes = [
   path: 'Admin',
   component: AdminLayoutComponent, 
   children: [
-    { path: 'Dashboard', component: DataTableComponent ,},
-    { path: 'addCategory', component: AddCategoryComponent ,}
+    { path: 'Dashboard', component: DataTableComponent, canActivate:[AuthGuard]},
+    { path: 'addCategory', component: AddCategoryComponent ,canActivate:[AuthGuard]}
   ]
 },
 { path: 'AdminLogin', component: AdminComponent },

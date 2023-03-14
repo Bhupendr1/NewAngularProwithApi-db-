@@ -135,14 +135,11 @@ export class ProductserviceService {
   }
 
   getCountCart(){
- 
-    let rdata={
+   let rdata={
       "UserID": 1
     }
     this.postRequestUrl01(rdata, "EcartCustomerCart/CartCount").subscribe(res=>{
-      //this.countdata=res[0].totalcart;
-      this.setcountCartval(res[0].totalcart);
-      //console.log(res[0].totalcart)
+       this.setcountCartval(res[0].totalcart);
     })
     return this.countdata;
   }
@@ -176,6 +173,7 @@ export class ProductserviceService {
   }
 
   postAddhistory(data: any) {
+    debugger
     return this.http.post<any>("http://localhost:3000/orderHistory/", data).pipe(map((res: any) => {
       return res;
     }))
@@ -191,8 +189,7 @@ export class ProductserviceService {
   // api calling start
   baseUrl01 = environment.baseUrl01;
   postRequestUrl01(data: any, ACTION: string) { 
-    debugger
-    ACTION = `${this.baseUrl01}` + ACTION; 
+   ACTION = `${this.baseUrl01}` + ACTION; 
   
   var  result = this.http.post<any>(ACTION, data); 
   return result;

@@ -2,7 +2,7 @@
     <div class="flex lg:flex-row lg:align-items-center justify-content-between headerborder surface-card px-3 ">
     <img src="assets/image/logo.png" alt="Image" height="80" routerLink="/" class="cursor-pointer">
     <div class="flex flex-grow-1 justify-content-end gap-3 align-items-center">
-        <ul class="list-none flex1 gap-2">
+        <ul class="list-none flex1 gap-2 mr-2">
             <li>
                 <a>
                     <img src="assets/image/england.png" alt="england flag" [class.active]="switchlang=='products'" class="cursor-pointer" (click)="useLanguage('products')">
@@ -26,7 +26,6 @@
             <li>
                 <a routerLink="/cart">
                     <i pBadge class="pi pi-shopping-cart ng-cart text-xl p-overlay-badge" severity="success" value={{cartCount}}></i>
-                    <span class="hidden">Cart</span>
                 </a>
             </li>
 

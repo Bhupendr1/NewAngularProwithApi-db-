@@ -29,11 +29,12 @@
                                 </th>
                                 <th pSortableColumn="Detail">Description<p-sortIcon field="Detail"></p-sortIcon></th>
                                 <th>Image</th>
-                                <th pSortableColumn="CName">Category <p-sortIcon
+                                <th pSortableColumn="CName">Category<p-sortIcon
                                         field="CName"></p-sortIcon></th>
-                                <th pSortableColumn="Discount">Discount <p-sortIcon
-                                        field="Discount"></p-sortIcon></th>
-                                        <th pSortableColumn="Price">Price <p-sortIcon
+                                <th pSortableColumn="Discount">Discount
+                                    <p-sortIcon field="Discount"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="Price">Price <p-sortIcon
                                             field="Price"></p-sortIcon></th>
                                 <th pSortableColumn="Qnt">Quantity<p-sortIcon field="Qnt"></p-sortIcon></th>
                                 <th>Actions</th>
@@ -60,7 +61,7 @@
                         </ng-template>
                         <ng-template pTemplate="summary">
                             <div class="flex align-items-center justify-content-between">
-                             Total {{products ? products.length : 0 }} products.
+                             Total {{products ? products.length : 0 }} Products.
                             </div>
                         </ng-template>
          </p-table>
@@ -139,7 +140,9 @@
                            <br>
                            <div class="formgrid grid">
                                <div class="field col">
-                                <p-fileUpload (onSelect)="onUpload($event)"></p-fileUpload>
+                                <p-fileUpload (onSelect)="onUpload($event)" [auto]="true" chooseLabel="Browser File">
+             
+                                </p-fileUpload>
                                 <small *ngIf="submitted && f.myFile.errors" id="file-help" class="p-error block">
                                        <div *ngIf="f.myFile.errors.pattern">File is Required</div>
                                    </small>

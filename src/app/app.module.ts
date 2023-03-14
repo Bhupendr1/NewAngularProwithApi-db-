@@ -14,6 +14,8 @@ import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
+import {GMapModule} from 'primeng/gmap';
+
 import { StepsModule } from 'primeng/steps';
 import {InputTextModule} from 'primeng/inputtext';
 import {RatingModule} from 'primeng/rating';
@@ -85,6 +87,7 @@ import { DataTableComponent } from './Auth/admin/data-table/data-table.component
 import { AddCategoryComponent } from './Auth/admin/add-category/add-category.component';
 import { AuthGuard} from './service/course.guard.service';
 import { AuthService } from './service/auth.service';
+import { DummyComponent } from './dummy/dummy.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -118,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminLayoutComponent,
     DataTableComponent,
     AddCategoryComponent,
+    DummyComponent,
    
   ],
   imports: [
@@ -130,6 +134,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasswordModule,
     TerminalModule,
     StepsModule,
+    GMapModule,
     SpeedDialModule,
     AutoCompleteModule,
     MenubarModule,

@@ -46,9 +46,7 @@ onSubmit() {
   //True if all the fields are filled
  else
   {
-
-    alert("Great!!");
-    this.authService.login();
+     this.authService.login();
     this.router.navigateByUrl('/Admin/Dashboard')
   }
  

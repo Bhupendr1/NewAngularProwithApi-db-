@@ -103,3 +103,8 @@ img {
         width: 40%;
     }
 }
+:host ::ng-deep .p-carousel-container {
+	display: flex;
+	flex-direction: row;
+    background-color: #fff !important;
+}

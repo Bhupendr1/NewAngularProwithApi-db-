@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ProductserviceService } from '../service/productservice.service';
-import { Product } from '../product';
 import { Router } from '@angular/router';
 import {
   ConfirmationService,
   MessageService,
   PrimeNGConfig
 } from "primeng/api";
-import { RadioButton } from 'primeng/radiobutton';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -31,6 +30,7 @@ export class CheckoutComponent {
       private confirmationService: ConfirmationService,
       private messageService: MessageService,
       private primengConfig: PrimeNGConfig,
+      private authService:AuthService
     ) {
 
     }
@@ -60,12 +60,10 @@ export class CheckoutComponent {
   }
    cart:any=[]
   cartlist(){
-    
     this.Productservice.getCartList().subscribe( res =>{
       this.cart=res;
     })
   }
-
   selectedItem :any = [];
   setItem(item:any){
     this.selectedItem = item
@@ -77,27 +75,26 @@ export class CheckoutComponent {
 onReject() {
   this.messageService.clear('c');
 }
-
 clear() {
   this.messageService.clear();
 }
-  submitted = false;
-
-  deleteitem(id:any){
+submitted = false;
+deleteitem(id:any){
     this.Productservice.deleteCart(id).subscribe(res=>{
     })
-  }
-  confirm(event:Event) {
+}
+confirm(event:Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: "Are you sure that you want to proceed?",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
+        debugger
           this.submitted = true;
           if (this.checkoutform.invalid) {
           return
-      }else{
-          let rdata=  {        
+          }else{
+          let rdata={        
             "Firstname": this.checkoutform.controls["Firstname"].value,
             "lastname": this.checkoutform.controls["lastname"].value,
             "email": this.checkoutform.controls["email"].value,
@@ -117,9 +114,7 @@ clear() {
             "date": Date()  
           }
           this.Productservice.postAddhistory(rdata).subscribe({
-            
-            next: (res) => {
-             
+          next: (res) => {        
               if (res.status = 200) {
                 this.messageService.add({
                   severity: "info",
@@ -130,14 +125,13 @@ clear() {
                  this.deleteitem(element.id);
                  localStorage.setItem("orderplace",JSON.stringify(rdata));
                  this.Productservice.ProductCount.next(res.length)
+                 this.authService.login();
                  this.router.navigateByUrl('/order');
-                //  this.Productservice.ProductCount.unsubscribe();
                  });
-                //  this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
       
               }
             },
-            error: (err) => {
+          error: (err) => {
               let errorObj = {
                 message: err.message,
                 err: err,
@@ -147,7 +141,7 @@ clear() {
             })
           }
         },
-      reject: () => {
+reject: () => {
         this.messageService.add({
           severity: "error",
           summary: "Rejected",
@@ -156,11 +150,10 @@ clear() {
       }
     });
   }
-  getCartItemCount(){
+getCartItemCount(){
     this.Productservice.getCartList().subscribe(d=>{
     this.Productservice.ProductCount.next(d.length)
-    })
-    }
-
+ })    
+}
 }
 

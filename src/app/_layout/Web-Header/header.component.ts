@@ -44,8 +44,7 @@ cartvalue:any=[]
       this._Api.getcountCartval().subscribe(g=>{
         this.cartCount=g;
       })
-       
-    }, 300);
+    },300);
 }  
 dropdownVisible = false;
 isMenuOpen = false;
@@ -72,10 +71,8 @@ cart:any[]=[]
 //     this.cart=res;
 //     })
 // }
-ngOnDestroy() {
+ngOnDestroy(){
   this.subscription.unsubscribe();
 }
-massage:string='your cart is Empty';
-massage1:string='Item is added click me';
 }
   

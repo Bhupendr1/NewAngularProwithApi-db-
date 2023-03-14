@@ -40,7 +40,7 @@ export class AddCategoryComponent {
    ngOnInit() {
     this.Categoryform=this.Formbuilder.group({
       CategoryId: ['0'],
-      CName:['',[Validators.required,Validators.pattern('^[a-zA-Z \-\']+'),Validators.minLength(5),Validators.maxLength(20)]],
+      CName:['',[Validators.required,Validators.pattern('^[a-zA-Z \-\']+'),Validators.minLength(2),Validators.maxLength(20)]],
       CDescription: ['',Validators.required],
        })
     this.loadDataCategory();

@@ -76,18 +76,18 @@ ngOnInit():void {
   // this.getCartItemCount();
   this.sortOptions = 
   [
-      {label: 'Price High to Low', value: '!price'},
-      {label: 'Price Low to High', value: 'price'}
+      {label: 'Price High to Low', value: '!Price'},
+      {label: 'Price Low to High', value: 'Price'}
   ];
   this.sortCategory = 
   [
-    {label: 'Vegetables', value: '!category'},
-    {label: 'Fruits', value: 'category'}
+    {label: 'Vegetables', value: '!CName'},
+    {label: 'Fruits', value: 'CName'}
 ];
   this.sortStock = 
   [
-    {label: 'In-Stock', value: 'inventoryStatus'},
-    {label: 'less or Out of Stock', value: '!inventoryStatus'}
+    {label: 'In-Stock', value: 'Qnt'},
+    {label: 'less or Out of Stock', value: '!Qnt'}
 ];
   this.primengConfig.ripple = true;
 }
@@ -108,7 +108,6 @@ status:any=[]
         if (res) {
           this._Api.getCountCart();
           this.messageService.add({key:'s',severity:'success', summary: 'Success', detail: res.Message.toString()});
-          // this.getCartItemCount();
 
         }
       },
@@ -122,13 +121,6 @@ TotalPrice(Price:any,discount:any){
   let totalPrice=(Price-(Price*discount/100)).toFixed(2);
   return totalPrice
 }
-// counterValue:any=[0];
-// getCartItemCount(){
-// this.productService.getCartList().subscribe(d=>{
-// this.productService.ProductCount.next(d.length)
-// })
-// }
-
 GetProduct(){
   this._Api.postRequestUrl01("",'EcartAddProduct/GetProduct').subscribe(res=>{
     this.products=res;

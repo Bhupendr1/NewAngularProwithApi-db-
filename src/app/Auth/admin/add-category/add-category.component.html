@@ -20,7 +20,7 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="name">Category Name <p-sortIcon field="name"></p-sortIcon>
+                        <th pSortableColumn="CategoryName">Category Name <p-sortIcon field="CategoryName"></p-sortIcon>
                         </th>
                         <th pSortableColumn="Description">Category Description <p-sortIcon
                                 field="Description"></p-sortIcon></th>
@@ -43,7 +43,7 @@
                 </ng-template>
                 <ng-template pTemplate="summary">
                     <div class="flex align-items-center justify-content-between">
-                    Total {{products ? products.length : 0 }} Category.
+                    Total {{(products ? products.length : 0 )}} Categories
                     </div>
                 </ng-template>
  </p-table>
@@ -82,4 +82,4 @@
         
 </p-dialog>
 </form>
- <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

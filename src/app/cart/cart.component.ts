@@ -4,6 +4,7 @@ import { Route, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ProductserviceService } from 'src/app/service/productservice.service';
 import { Product } from '../product';
+import { AuthService } from '../service/auth.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -16,7 +17,7 @@ export class CartComponent {
   productvalue: number = 0;
   quantitydata: any;
   quantitysingle: any = [];
-  constructor(private _Api: ProductserviceService, private formBuilder: FormBuilder, private route: Router, private messageService: MessageService) { }
+  constructor(private _Api: ProductserviceService, private formBuilder: FormBuilder, private route: Router, private messageService: MessageService, private authService:AuthService) { }
   cart: any = []
   checkoutForm = this.formBuilder.group({
     Price: ['', Validators.required],
@@ -72,6 +73,7 @@ export class CartComponent {
     console.log(this.getTotal());
     sessionStorage.setItem('totalPrice', this.getTotal());
     sessionStorage.setItem('itemsPerPage', JSON.stringify(this.cart));
+    this.authService.login();
     this.route.navigateByUrl('/Checkout')
   }
 
